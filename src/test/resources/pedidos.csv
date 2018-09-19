@@ -1,0 +1,21 @@
+ID_PEDIDO,ID_USUARIO,ID_TIENDA,TOTAL,SUBTOTAL,DIRECCION
+1        ,1         ,1        ,123  ,123     ,Dirección 1
+2        ,1         ,1        ,2    ,2       ,Dirección 1
+3        ,1         ,1        ,32   ,32      ,Dirección 1
+4        ,1         ,1        ,12   ,12      ,Dirección 1
+5        ,1         ,1        ,42   ,42      ,Dirección 1
+6        ,1         ,1        ,4    ,4       ,Dirección 1
+7        ,1         ,1        ,53   ,53      ,Dirección 1
+8        ,1         ,2        ,123  ,123     ,Dirección 2
+9        ,1         ,2        ,52   ,52      ,Dirección 2
+10       ,1         ,2        ,523  ,523     ,Dirección 1
+11       ,2         ,1        ,123  ,123     ,Dirección 2
+13       ,2         ,1        ,24   ,24      ,Dirección 2
+12       ,2         ,1        ,754  ,754     ,Dirección 2
+14       ,2         ,1        ,425  ,425     ,Dirección 2
+15       ,2         ,1        ,75   ,75      ,Dirección 2
+16       ,2         ,1        ,54   ,54      ,Dirección 2
+17       ,2         ,1        ,245  ,245     ,Dirección 2
+18       ,2         ,2        ,75   ,75      ,Dirección 2
+19       ,2         ,2        ,245  ,245     ,Dirección 2
+20       ,2         ,2        ,24   ,24      ,Dirección 2

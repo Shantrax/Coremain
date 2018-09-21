@@ -1,6 +1,6 @@
 package test.java.SQLDAO;
 
-import main.java.database.HikariCP;
+import main.java.sqlDAO.HikariCP;
 import main.java.sqlDAO.TestSQLDAO;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;

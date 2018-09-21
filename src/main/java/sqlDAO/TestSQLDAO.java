@@ -1,6 +1,5 @@
 package main.java.sqlDAO;
 
-import main.java.database.HikariCP;
 import test.java.SQLDAO.UserOrder;
 
 import java.sql.Connection;

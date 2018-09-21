@@ -1,4 +1,4 @@
-package main.java.database;
+package main.java.sqlDAO;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;

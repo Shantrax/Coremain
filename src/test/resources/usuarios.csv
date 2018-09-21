@@ -1,3 +1,7 @@
 ID_USUARIO, NOMBRE, DIRECCION
-1, "Pepe", "Calle Don Manolo"
-2, "Manolo", "Calle Don Pepe"
+1,Pepe,Calle Don Manolo
+2,Manolo,Calle Don Pepe
+3,UserWithOrders,Calle With Orders
+4,UserWithoutOrders,Calle Without Orders
+5,EmptyUser,Calle Empty User
+6,MostExpensiveUser,Calle Most Expensive

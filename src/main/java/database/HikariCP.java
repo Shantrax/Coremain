@@ -2,31 +2,36 @@ package main.java.database;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 public class HikariCP {
+    private static Logger logger = LoggerFactory.getLogger(HikariCP.class);
+
     private static DataSource datasource;
 
-    private String databaseName;
+    public HikariCP () {}
 
-    public HikariCP (String databaseName) {
-        this.databaseName = databaseName;
+    public void connectTo(String database) {
+        logger.info("Init connection to database '" + database + "'");
+
+        HikariConfig config = new HikariConfig();
+
+        config.setJdbcUrl("jdbc:mysql://localhost/" + database + "?serverTimezone=UTC&autoReconnect=true&useSSL=false");
+        config.setUsername("root");
+        config.setPassword("2342Mcrsft");
+        config.setMaximumPoolSize(10);
+        config.setAutoCommit(true);
+        datasource = new HikariDataSource(config);
     }
 
-    public DataSource getDataSource() {
-        if (datasource == null) {
-            HikariConfig config = new HikariConfig();
-
-            config.setJdbcUrl("jdbc:mysql://localhost/" + databaseName + "?serverTimezone=UTC&autoReconnect=true&useSSL=false");
-            config.setUsername("root");
-            config.setPassword("C0nv3rf1t@1nf0");
-            config.setMaximumPoolSize(10);
-            config.setAutoCommit(true);
-            datasource = new HikariDataSource(config);
-        }
-
-        return datasource;
+    // El encargado de dar las conexiones debería estar en la clase que las maneja, y no en las demás
+    public Connection getConnection() throws SQLException {
+        return datasource.getConnection();
     }
 
 }

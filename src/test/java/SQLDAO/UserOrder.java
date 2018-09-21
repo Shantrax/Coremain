@@ -3,8 +3,8 @@ package test.java.SQLDAO;
 // Añado la clase UserOder para devolverla como resultado de getUserMaxOrder()
 public class UserOrder {
     private Double total;
-    private Long userId;
-    private Long orderId;
+    private Integer userId;
+    private Integer orderId;
     private String name;
     private String address;
 
@@ -18,19 +18,19 @@ public class UserOrder {
         this.total = total;
     }
 
-    public Long getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
-    public Long getOrderId() {
+    public Integer getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(Long orderId) {
+    public void setOrderId(Integer orderId) {
         this.orderId = orderId;
     }
 

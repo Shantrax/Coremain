@@ -154,11 +154,10 @@ class TestSQLDAOTest {
                 for (Order ordersFromUserWithOrder : ordersFromUserWithOrders) {
                     boolean containsIt = copiedOrders.stream().anyMatch(copiedOrder ->
                             copiedOrder.getAddress().equals(ordersFromUserWithOrder.getAddress()) &&
-                                    copiedOrder.getTimestamp().equals(ordersFromUserWithOrder.getTimestamp()) &&
-                                    copiedOrder.getShopId() == ordersFromUserWithOrder.getShopId() &&
-                                    Double.compare(copiedOrder.getTotal(), ordersFromUserWithOrder.getTotal()) > -1 &&
-                                    Double.compare(copiedOrder.getSubtotal(), ordersFromUserWithOrder.getSubtotal()) > -1);
-                    System.out.println("Contains it " + containsIt);
+                            copiedOrder.getTimestamp().equals(ordersFromUserWithOrder.getTimestamp()) &&
+                            copiedOrder.getShopId() == ordersFromUserWithOrder.getShopId() &&
+                            Double.compare(copiedOrder.getTotal(), ordersFromUserWithOrder.getTotal()) > -1 &&
+                            Double.compare(copiedOrder.getSubtotal(), ordersFromUserWithOrder.getSubtotal()) > -1);
                     if (!containsIt) {
                         containsAll.set(false);
                         break;

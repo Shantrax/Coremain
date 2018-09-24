@@ -115,16 +115,19 @@ public class TestSQLDAO {
         UserOrder userOrder = null;
 
         /*
-            String.format a stmt.set
-            Cambié la query para traer de base de datos el dato que buscamos directamente.
+            Pensé en está query para no tener que calcular el máximo a mano, el problema es que el sub-select no es muy óptimo.
 
-            En caso de que haya dos pedidos iguales, coge el último.
-         */
-        String query = "SELECT U.ID_USUARIO, P.ID_PEDIDO, P.TOTAL, U.NOMBRE, U.DIRECCION" +
+            String query = "SELECT U.ID_USUARIO, P.ID_PEDIDO, P.TOTAL, U.NOMBRE, U.DIRECCION" +
                 " FROM PEDIDOS AS P" +
                 " INNER JOIN USUARIOS AS U ON P.ID_USUARIO = U.ID_USUARIO" +
                 " WHERE P.ID_TIENDA = ?" +
                 " AND P.TOTAL = (SELECT MAX(TOTAL) FROM PEDIDOS WHERE ID_TIENDA = P.ID_TIENDA ORDER BY FECHA DESC LIMIT 1)";
+         */
+
+        String query = "SELECT U.ID_USUARIO, P.ID_PEDIDO, P.TOTAL, U.NOMBRE, U.DIRECCION" +
+                " FROM PEDIDOS AS P" +
+                " INNER JOIN USUARIOS AS U ON P.ID_USUARIO = U.ID_USUARIO" +
+                " WHERE P.ID_TIENDA = ?";
 
         // try-with-resources
         try (Connection connection = hikariCP.getConnection();
@@ -133,12 +136,23 @@ public class TestSQLDAO {
 
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
-                    userOrder = new UserOrder();
-                    userOrder.setAddress(rs.getString("DIRECCION"));
-                    userOrder.setUserId(rs.getInt("ID_USUARIO"));
-                    userOrder.setOrderId(rs.getInt("ID_PEDIDO"));
-                    userOrder.setName(rs.getString("NOMBRE"));
-                    userOrder.setTotal(rs.getDouble("TOTAL"));
+                    if (userOrder == null) {
+                        userOrder = new UserOrder();
+                        userOrder.setAddress(rs.getString("DIRECCION"));
+                        userOrder.setUserId(rs.getInt("ID_USUARIO"));
+                        userOrder.setOrderId(rs.getInt("ID_PEDIDO"));
+                        userOrder.setName(rs.getString("NOMBRE"));
+                        userOrder.setTotal(rs.getDouble("TOTAL"));
+                    } else {
+                        double total = rs.getDouble("TOTAL");
+                        if (total > userOrder.getTotal()) {
+                            userOrder.setAddress(rs.getString("DIRECCION"));
+                            userOrder.setUserId(rs.getInt("ID_USUARIO"));
+                            userOrder.setOrderId(rs.getInt("ID_PEDIDO"));
+                            userOrder.setName(rs.getString("NOMBRE"));
+                            userOrder.setTotal(total);
+                        }
+                    }
                 }
             }
         } catch (SQLException e) {

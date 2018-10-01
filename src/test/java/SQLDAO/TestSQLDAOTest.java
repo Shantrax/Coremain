@@ -1,7 +1,9 @@
 package test.java.SQLDAO;
 
 import main.java.sqlDAO.HikariCP;
+import main.java.sqlDAO.Order;
 import main.java.sqlDAO.TestSQLDAO;
+import main.java.sqlDAO.UserOrder;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -76,19 +78,16 @@ class TestSQLDAOTest {
     @Test
     void getMaxUserOrderId() {
         HashMap<Integer, Integer> maxUserOrderId = testSQLDAO.getLastOrderByShopID(1);
-        System.out.println("maxUserOrderId" + maxUserOrderId.toString());
         // Uso optional porque si lo dejará como Long daría un error de ambigüedad con el método assertEquals
         assertEquals(Optional.of(7), Optional.ofNullable(maxUserOrderId.get(1)));
         assertEquals(Optional.of(17), Optional.ofNullable(maxUserOrderId.get(2)));
         assertEquals(Optional.empty(), Optional.ofNullable(maxUserOrderId.get(5)));
 
         maxUserOrderId = testSQLDAO.getLastOrderByShopID(2);
-        System.out.println("maxUserOrderId" + maxUserOrderId.toString());
         assertEquals(Optional.of(10), Optional.ofNullable(maxUserOrderId.get(1)));
         assertEquals(Optional.of(20), Optional.ofNullable(maxUserOrderId.get(2)));
 
         maxUserOrderId = testSQLDAO.getLastOrderByShopID(3);
-        System.out.println("maxUserOrderId" + maxUserOrderId.toString());
         assertEquals(Optional.empty(), Optional.ofNullable(maxUserOrderId.get(1)));
         assertEquals(Optional.empty(), Optional.ofNullable(maxUserOrderId.get(2)));
     }

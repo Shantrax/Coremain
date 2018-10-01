@@ -1,4 +1,4 @@
-package test.java.SQLDAO;
+package main.java.sqlDAO;
 
 import java.sql.Timestamp;
 

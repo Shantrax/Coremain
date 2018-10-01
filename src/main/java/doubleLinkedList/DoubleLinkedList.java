@@ -1,8 +1,9 @@
 package main.java.doubleLinkedList;
 
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class DoubleLinkedList<E> {
+public class DoubleLinkedList<E> implements Iterable<E> {
     private Node head;
     private Node tail;
     private int size = 0;
@@ -18,13 +19,18 @@ public class DoubleLinkedList<E> {
     public void addFirst(E element) {
         Node tmpNode = new Node(head, null, element);
 
-        if (head != null) {
-            head.previous = tmpNode;
-        }
+        if (size == 0) {
+            head = tmpNode;
+            head.next = tail;
 
-        head = tmpNode;
-        if (tail == null) {
             tail = tmpNode;
+            tail.previous = head;
+        } else {
+            tmpNode.next = head;
+            tmpNode.previous = null;
+
+            head.previous = tmpNode;
+            head = tmpNode;
         }
 
         size++;
@@ -33,13 +39,18 @@ public class DoubleLinkedList<E> {
     public void addLast(E element) {
         Node tmpNode = new Node(null, tail, element);
 
-        if (tail != null) {
-            tail.next = tmpNode;
-        }
-
-        tail = tmpNode;
-        if (head == null) {
+        if (size == 0) {
             head = tmpNode;
+            head.next = tail;
+
+            tail = tmpNode;
+            tail.previous = head;
+        } else {
+            tmpNode.previous = tail;
+            tmpNode.next = null;
+
+            tail.next = tmpNode;
+            tail = tmpNode;
         }
 
         size++;
@@ -50,7 +61,7 @@ public class DoubleLinkedList<E> {
             throw new NoSuchElementException();
         }
 
-       return head.element;
+        return head.element;
     }
 
     public E getLast() {
@@ -68,9 +79,10 @@ public class DoubleLinkedList<E> {
         }
 
         E element = head.element;
-        head = head.previous;
+        head = head.next;
 
-        if (head != null) head.next = null;
+        if (head != null)
+            head.previous = null;
 
         size--;
 
@@ -86,14 +98,34 @@ public class DoubleLinkedList<E> {
         E element = tail.element;
         tail = tail.previous;
 
-        if (tail != null) tail.next = null;
+        if (tail != null)
+            tail.next = null;
 
         size--;
 
         return element;
     }
 
-    private class Node {
+    @Override
+    public Iterator<E> iterator() {
+        return new Iterator<E>() {
+            Node node = head;
+
+            @Override
+            public boolean hasNext() {
+                return node != null;
+            }
+
+            @Override
+            public E next() {
+                E value = node.element;
+                node = node.next;
+                return value;
+            }
+        };
+    }
+
+    public class Node {
         private E element;
         private Node next;
         private Node previous;
@@ -104,4 +136,5 @@ public class DoubleLinkedList<E> {
             this.next = next;
         }
     }
+
 }

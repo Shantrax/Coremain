@@ -1,4 +1,4 @@
-package test.java.SQLDAO;
+package main.java.sqlDAO;
 
 // Añado la clase UserOder para devolverla como resultado de getUserMaxOrder()
 public class UserOrder {
@@ -8,7 +8,7 @@ public class UserOrder {
     private String name;
     private String address;
 
-    public UserOrder() {}
+    UserOrder() {}
 
     public Double getTotal() {
         return total;

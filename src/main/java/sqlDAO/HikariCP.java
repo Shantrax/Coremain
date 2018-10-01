@@ -23,7 +23,7 @@ public class HikariCP {
 
         config.setJdbcUrl("jdbc:mysql://localhost/" + database + "?serverTimezone=UTC&autoReconnect=true&useSSL=false");
         config.setUsername("root");
-        config.setPassword("2342Mcrsft");
+        config.setPassword("password");
         config.setMaximumPoolSize(10);
         config.setAutoCommit(true);
         datasource = new HikariDataSource(config);

@@ -1,7 +1,5 @@
 package main.java.sqlDAO;
 
-import test.java.SQLDAO.UserOrder;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
